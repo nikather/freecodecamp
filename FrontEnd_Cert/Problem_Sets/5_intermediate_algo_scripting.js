@@ -1,7 +1,11 @@
-
+/*
+Intermediate Alog Scripting
+50 hours / 21 problems 
+About two hours a problem
+*/
 
 // #1 Sum All Numbers in a Range
-
+/* Start
 
 function sumAll(arr) {
   
@@ -18,6 +22,7 @@ function sumAll(arr) {
 
 //sumAll([1, 4]);
 
+End */
 
 // #2 Diff Two Arrays
 
@@ -32,7 +37,7 @@ diffArray([1, 2, 3, 5], [1, 2, 3, 4, 5]);
 
 
 
-
+//Note remember to add OLD codes to a code mirror note book
 
 
 
