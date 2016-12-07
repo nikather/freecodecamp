@@ -1,0 +1,47 @@
+<!-- FCC Pomodoro Timer challenge. -->
+<!-- DIRECTIONS-->
+<!-- * YOU MUST PAUSE TO RESET TIMER*-->
+<!-- Click "Pause" button to pause the timer and change Session / Break Length (- or +). Click "Set" button to set the new session / break length. Click Play button to resume timer. -->
+<div class="container ">
+  <div class="title fa">My Pomodoro</div>
+  <div class="controls">
+  <div class="settings row">
+    <div class="#">
+      <div class="break fa">Break Length</div>
+      <div class="session fa">Session Length</div>
+    </div>
+  </div>
+  <div class="display_settings row">
+    <div class="#">
+      <button id ="less" class="bk-break">-</button>
+        <div class="display_break fa">00</div>
+      <button class="fwd-break ">+</button>
+      
+      <button class="bk-session ">-</button>
+      <div class="display_session fa">00</div>
+      <button class="fwd-session">+</button>
+    </div>
+  </div>
+ </div>
+  <div id="example2form">
+    <div class="pomProgressTimer img img-responsive">
+        <span class="time fa" id="countdown">00:00:00</span>
+    </div>  
+  <div class="#">
+    <button id="start-countdown" class="btn btn-danger fa fa-play"  type='button' value='Play/Pause'onclick='Example2.Timer.toggle();'> </button>
+    <button id="pause" class="btn btn-danger fa fa-pause pause-countdown "  type='button' value='Play/Pause'onclick='Example2.Timer.toggle();'></button>
+    <button id="resume" class="btn btn-danger fa fa-resume resume-countdown" type='button' value='Play/Pause'onclick='Example2.Timer.toggle();'>Resume</button>
+  </div>
+      
+        <input id="stop" type='button' value='Set' onclick='Example2.resetCountdown();' />
+      <!--  <input type='text' name='startTime' value='300' style='width:30px;' /> -->
+    </div>
+  </div>
+  </br>
+</br>
+<!--<div class="#">
+  <button id="pause-countdown">
+    Pause</button>
+  <button id="resume-countdown">
+    Resume</button>
+</div> -->

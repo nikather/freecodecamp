@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<!-- saved from url=(0042)http://s.codepen.io/hezag/fullpage/YXLqPV? -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+
+
+    <title>CodePen - A Pomodoro Clock</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    
+    
+        <style>
+      @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,600,300);
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  vertical-align: baseline;
+}
+
+body {
+  background-color: #2A2C31;
+  color: #FFFEDF;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.center {
+  text-shadow: 0px 1px 1px #191919;
+  cursor: default;
+  width: 450px;
+  margin: auto;
+  display: block;
+  position: relative;
+}
+.center .title {
+  padding-top: 10px;
+  width: 100%;
+  font-weight: 600;
+  text-align: center;
+  font-size: 45px;
+  padding-bottom: 15px;
+}
+.center .settings {
+  width: 350px;
+  padding-bottom: 15px;
+  display: table;
+  margin: auto;
+  position: relative;
+  text-align: center;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.center .settings .description {
+  font-size: 15px;
+}
+.center .settings .value {
+  font-size: 30px;
+}
+.center .settings .session {
+  width: 108px;
+  float: right;
+}
+.center .settings .session .description {
+  color: #2ecc71;
+}
+.center .settings .break {
+  width: 100px;
+  float: left;
+}
+.center .settings .break .description {
+  color: #e74c3c;
+}
+.center .settings .control {
+  font-size: 33px;
+  cursor: pointer;
+}
+.center .settings .control:hover {
+  color: #95a5a6;
+}
+.center .next-pomodoro {
+  margin-left: 30px;
+  float: left;
+  cursor: pointer;
+  font-weight: bold;
+}
+.center .reset-pomodoro {
+  margin-right: 30px;
+  float: right;
+  cursor: pointer;
+  font-weight: bold;
+}
+.center .pomodoro {
+  cursor: pointer;
+  width: 300px;
+  height: 300px;
+  margin: auto;
+  clear: both;
+  border-radius: 50%;
+  border: 3px #2ecc71 solid;
+  position: relative;
+  overflow: hidden;
+  text-shadow: none;
+}
+.center .pomodoro .fill {
+  width: 100%;
+  height: 0%;
+  position: absolute;
+  left: 0;
+}
+.center .pomodoro .fill.session {
+  bottom: 0;
+  z-index: 2;
+  background-color: #2ecc71;
+}
+.center .pomodoro .fill.break {
+  top: 0;
+  z-index: 3;
+  background-color: #c0392b;
+}
+.center .pomodoro .time-left {
+  top: 32%;
+  left: 50%;
+  margin-left: -125px;
+  width: 250px;
+  text-align: center;
+  font-size: 60px;
+  z-index: 4;
+  position: absolute;
+}
+.center .pomodoro .status {
+  bottom: 35%;
+  left: 50%;
+  margin-left: -125px;
+  width: 250px;
+  text-align: center;
+  font-size: 15px;
+  z-index: 4;
+  position: absolute;
+}
+
+.footer {
+  clear: both;
+  width: 100%;
+  padding-top: 40px;
+  padding-bottom: 25px;
+  font-size: 12px;
+  text-align: center;
+}
+.footer a {
+  color: #2ecc71;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+    </style>
+
+    <script>
+  window.console = window.console || function(t) {};
+</script>
+
+    
+    
+  </head>
+
+  <body translate="no">
+
+    <div class="center">
+  <div class="title">
+    Pomodoro Clock
+  </div>
+  <div class="settings">
+    <div class="break">
+      <div class="description">Break Length</div>
+      <div class="value">
+        <span class="control db">-</span> <span class="v">5</span> <span class="control ib">+</span>
+      </div>
+    </div>
+    <div class="session">
+      <div class="description">Session Length</div>
+      <div class="value">
+        <span class="control ds">-</span> <span class="v">25</span> <span class="control is">+</span>
+      </div>
+    </div>
+  </div>
+  <div class="pomodoro">
+    <div class="fill session">
+    </div>
+    <div class="fill break">
+    </div>
+    <div class="time-left">25:00</div>
+    <div class="status">Click to Start</div>
+  </div>
+  <div class="next-pomodoro">
+    Next
+  </div>
+  <div class="reset-pomodoro">
+    Reset
+  </div>
+</div>
+<div class="footer">
+  by <a href="http://codepen.io/hezag">hezag</a> with <a href="http://www.freecodecamp.com/challenges/zipline-build-a-pomodoro-clock" target="_blank">freeCodeCamp</a>
+</div>
+      <script src="./stopExecutionOnTimeout-53beeb1a007ec32040abaf4c9385ebfc.js.download"></script>
+
+    <script src="./jquery.min.js.download"></script>
+<script src="./jquery-ui.min.js.download"></script>
+
+        <script>
+      $(document).ready(function() {
+  var sessionLength = 25,
+    breakLength = 5,
+    isSession = true,
+    timeLeft = sessionLength * 60,
+    isPaused = true,
+    getFormatedTime = function() {
+      var m = Math.floor(timeLeft / 60),
+        s = (timeLeft - m * 60);
+      return m + ':' + (s < 10 ? '0' : '') + s;
+    };
+
+  var $fillAnimationSess = null,
+    $fillAnimationBreak = null;
+  var intervalCounter = null;
+
+  var updateSettingsTimeValues = function() {
+      $('.settings>.break>.value>.v').text(breakLength);
+      $('.settings>.session>.value>.v').text(sessionLength);
+    },
+    pausePomodoro = function() {
+      if ($fillAnimationSess !== null)
+        $fillAnimationSess.stop();
+      if ($fillAnimationBreak !== null)
+        $fillAnimationBreak.stop();
+      isPaused = true;
+      clearInterval(intervalCounter);
+      $('.status').text('Click to Start');
+    },
+    nextStep = function() {
+      if (isSession) {
+        timeLeft = breakLength * 60;
+        $('.fill.session').animate({
+          height: '100%'
+        }, 500);
+        $('.fill.break').animate({
+          height: '0%'
+        }, 500);
+        $fillAnimationBreak = $('.fill.break').animate({
+          height: '100%'
+        }, (timeLeft * 1000));
+        isSession = false;
+      } 
+      else {
+        $('.fill.session').animate({
+          height: '0%'
+        }, 500);
+        $('.fill.break').animate({
+          height: '0%'
+        }, 500);
+        isSession = true;
+        timeLeft = sessionLength * 60;
+        $fillAnimationSess = $('.fill.session').animate({
+          height: '100%'
+        }, (timeLeft * 1000));
+      }
+    },
+    startPomodoro = function() {
+      intervalCounter = setInterval(function() {
+        if (timeLeft > 0) {
+          timeLeft--;
+          $('.pomodoro>.time-left').text(getFormatedTime());
+        } else
+          nextStep();
+      }, 1000);
+      isPaused = false;
+      isSession = !isSession;
+      nextStep();
+      $('.status').text('Click to Stop');
+    };
+  $('.pomodoro>.time-left').text(getFormatedTime());
+  $('.reset-pomodoro').on('click', function() {
+    pausePomodoro();
+    isSession = !isSession;
+    nextStep();
+    $('.pomodoro>.time-left').text(getFormatedTime());
+  });
+  $('.next-pomodoro').on('click', function() {
+    pausePomodoro();
+    isSession = !isSession;
+    startPomodoro();
+  });
+  $('.pomodoro').on('click', function() {
+    if (isPaused) {
+      startPomodoro();
+    } else {
+      pausePomodoro();
+    }
+  });
+  $('.control').on('click', function() {
+    if ($(this).hasClass('is') && sessionLength < 100)
+      sessionLength++;
+    else if ($(this).hasClass('ds') && sessionLength > 1)
+      sessionLength--;
+    else if ($(this).hasClass('ib') && breakLength < 100)
+      breakLength++;
+    else if ($(this).hasClass('db') && breakLength > 1)
+      breakLength--;
+    else
+      return false;
+
+    pausePomodoro();
+    if (isSession) {
+      timeLeft = sessionLength * 60;
+    } else {
+      timeLeft = breakLength * 60;
+    }
+    $('.pomodoro>.time-left').text(getFormatedTime());
+    updateSettingsTimeValues();
+  });
+});
+      //# sourceURL=pen.js
+    </script>
+
+    
+    <script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+</script>
+
+    
+  
+
+ 
+</body></html>
