@@ -1,6 +1,6 @@
 
 
-// Sum All Numbers in a Range
+// #1 Sum All Numbers in a Range
 
 
 function sumAll(arr) {
@@ -19,7 +19,7 @@ function sumAll(arr) {
 //sumAll([1, 4]);
 
 
-// Diff Two Arrays
+// #2 Diff Two Arrays
 
 
 function diffArray(arr1, arr2) {
@@ -46,7 +46,7 @@ diffArray([1, 2, 3, 5], [1, 2, 3, 4, 5]);
 
 
 
-// Roman Numeral Converter
+// #3 Roman Numeral Converter
 
 function convertToRoman(num) {
  return num;
@@ -61,4 +61,17 @@ convertToRoman(36);
 
 
 
+// #4 Wherefore art thou
+
+function whatIsInAName(collection, source) {
+  // What's in a name?
+  var arr = [];
+  // Only change code below this line
+  
+  
+  // Only change code above this line
+  return arr;
+}
+
+whatIsInAName([{ first: "Romeo", last: "Montague" }, { first: "Mercutio", last: null }, { first: "Tybalt", last: "Capulet" }], { last: "Capulet" });
 
