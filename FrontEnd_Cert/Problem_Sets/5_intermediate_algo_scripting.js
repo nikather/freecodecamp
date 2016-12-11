@@ -29,14 +29,21 @@ End */
 
 function diffArray(arr1, arr2) {
   var newArr = [];
+  newArr = arr1.concat(arr2);
   // Same, same; but different.
-  return newArr;
+  return newArr.filter(
+      function compare (item) {
+        if (!arr1.includes(item) || !arr2.includes(item)) {
+          return item;
+        }
+      }
+    );
 }
 
 diffArray([1, 2, 3, 5], [1, 2, 3, 4, 5]);
 
-blah
-
+/*
+Old way
 function diff(arr1, arr2) {
   var newArr = arr1.concat(arr2);
 
@@ -48,6 +55,7 @@ function diff(arr1, arr2) {
 
   return newArr.filter(check);
 }
+*/
 
 //Note remember to add OLD codes to a code mirror note book
 
@@ -76,6 +84,16 @@ convertToRoman(36);
 // convertToRoman(649) should return "DCXLIX"
 // convertToRoman(2014) should return "MMXIV"
 
+/* 
+Notes:
+Map decimals to roman numerals 
+key value look up
+Dictionary type
+var decimalValue = [ 1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1 ];
+var romans = ["I", "V", "X", "L", "C", "D", "M"];
+var romanNumeral = [ 'M', 'CM', 'D', 'CD', 'C', 'XC', 'L', 'XL', 'X', 'IX', 'V', 'IV', 'I' ];
+
+*/
 
 
 // #4 Wherefore art thou
