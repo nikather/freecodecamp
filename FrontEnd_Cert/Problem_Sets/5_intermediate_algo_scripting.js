@@ -110,3 +110,16 @@ function whatIsInAName(collection, source) {
 
 whatIsInAName([{ first: "Romeo", last: "Montague" }, { first: "Mercutio", last: null }, { first: "Tybalt", last: "Capulet" }], { last: "Capulet" });
 
+
+
+
+
+
+
+function spinalCase(str) {
+  // "It's such a fine line between stupid, and clever."
+  // --David St. Hubbins
+  return str.replace(/\s+/g, '-').toLowerCase();
+}
+
+spinalCase('This Is Spinal Tap');
