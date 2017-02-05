@@ -97,6 +97,16 @@ var romanNumeral = [ 'M', 'CM', 'D', 'CD', 'C', 'XC', 'L', 'XL', 'X', 'IX', 'V',
 
 
 // #4 Wherefore art thou
+// Notes:
+/* 
+
+Object.prototype.hasOwnProperty()
+method to know if the property name exists in an object (as its own property).
+
+Object.keys() 
+returns an array whose elements are strings corresponding to the enumerable properties found directly upon object. 
+The ordering of the properties is the same as that given by looping over the properties of the object manually.
+*/
 
 function whatIsInAName(collection, source) {
   // What's in a name?
